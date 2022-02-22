@@ -170,7 +170,7 @@ router.get('/favorites', ensureLoggedIn(), async (req, res) => {
 })
 
 
-/* ---- Page showing a user's current loans and pending holds, and past loans ----*/
+/* ---- Page showing a user's current loans and pending holds----*/
 router.get('/loansandholds', ensureLoggedIn(), async (req, res) => {
 
     const userId = req.user._id;
