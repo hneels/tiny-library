@@ -13,6 +13,8 @@ The app implements the following models/ MongoDB collections:
 * Loan, which stores data about a copy of a book that is checked out to a user, including a time of checkout and a time of return, if applicable.
 * Favorite, which stores an association of a user's favorite books.
 
+![library models](library.png?raw=true "Title")
+
 The MongoDB connection is stored in db/dbconnect.js and the dbinit.js file can be run to seed the library with book data.
 
 ### Unauthenticated Views
