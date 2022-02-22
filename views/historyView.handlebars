@@ -1,0 +1,29 @@
+<h2>{{user.first}}'s Past Checkouts</h2>
+<hr>
+{{#if pastLoans}}
+You have returned the following books:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Borrowed</th>
+            <th scope="col">Returned</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each pastLoans}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{borrowed}}</td>
+            <td>{{returned}}</td>
+            <td><a href="/book/{{_id}}">View</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+You haven't checked out any books yet. Visit a branch to pick up a book from your hold list.
+{{/if}}

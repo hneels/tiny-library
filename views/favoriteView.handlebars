@@ -1,0 +1,28 @@
+<h2>{{user.first}}'s favorites</h2>
+
+
+{{#if books}}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Subject</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each books}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{subject}}</td>
+            <td><a href="/book/{{_id}}">View</a></td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>
+{{else}}
+No Favorites yet!
+{{/if}}

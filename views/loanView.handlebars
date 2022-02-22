@@ -1,0 +1,61 @@
+<h2>{{user.first}}'s Loans and Holds</h2>
+<hr>
+
+<h4>Current Loans</h4>
+{{#if loans}}
+You currently have the following books checked out:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Checkout Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each loans}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{borrowed}}</td>
+            <td><a href="/book/{{_id}}">View</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+You don't have any books checked out right now. Visit a branch to pick up a book from your hold list.
+{{/if}}
+
+<br>
+<hr>
+
+<h4>Your Holds</h4>
+{{#if holds}}
+You have requested to check out the following books, pending librarian approval:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Hold Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each holds}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{created}}</td>
+            <td><a href="/book/{{_id}}">View</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+You don't have any books on hold. <a href="/">View our inventory to place a hold on a book.</a>
+{{/if}}
+
+<br>

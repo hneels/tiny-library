@@ -1,0 +1,33 @@
+<h2>Search Results</h2>
+All books with a title, author, or subject that contains "{{phrase}}":
+
+
+{{#if books}}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year</th>
+            <th scope="col">Subject</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each books}}
+        <tr>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{year}}</td>
+            <td>{{subject}}</td>
+            <td><a href="/book/{{_id}}">View</a></td>
+        </tr>
+        {{/each}}
+
+    </tbody>
+</table>
+{{else}}
+<hr>
+Your search for "{{phrase}}" did not return any results. Please try a different query or <a href="/">browse our
+    collection.</a>
+{{/if}}

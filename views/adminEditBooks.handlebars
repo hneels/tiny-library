@@ -1,0 +1,40 @@
+{{#section 'script'}}
+<script src="/scripts/editBook.js" defer></script>
+{{/section}}
+
+<h2>Update Inventory</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Copies</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each books}}
+        <tr id="row-{{_id}}">
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{year}}</td>
+            <td>{{subject}}</td>
+            <td id="copies-{{_id}}">
+                {{copies}}
+            </td>
+            <td id="input-{{_id}}" style="display:none"><input class="form-control form-control-sm" type="number"
+                    value="{{copies}}" min="1">
+            </td>
+            <td>
+                <button class="btn btn-primary editBtn" data-book="{{_id}}">Edit</button>
+            </td>
+        </tr>
+
+        {{/each}}
+
+    </tbody>
+</table>

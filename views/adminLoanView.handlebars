@@ -1,0 +1,78 @@
+<h2>Check In &amp; Check Out Books</h2>
+<hr>
+<h4>Pending Holds</h4>
+{{#if holds}}
+Library patrons have requested to check out the following books:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Patron</th>
+            <th scope="col">Book</th>
+            <th scope="col">Hold Date</th>
+            <th scope="col">Total Inventory</th>
+            <th scope="col">Copies Available</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each holds}}
+        <tr>
+            <td>{{userFirst}} {{userLast}}</td>
+            <td>{{title}}</td>
+            <td>{{created}}</td>
+            <td>{{inventory}}</td>
+            <td>{{availableCount}}</td>
+            <td>
+                <!--hidden form to check out a book -->
+                <form action="/admin/checkout" method="POST">
+                    <input type="hidden" name="userId" value="{{userId}}">
+                    <input type="hidden" name="bookId" value="{{bookId}}">
+                    <input type="submit" value="Checkout" class=" btn btn-danger" {{#if unavailable}} disabled {{/if}}>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+No users have an active request to check out a book.
+{{/if}}
+<br>
+<hr>
+
+
+<h4>Current Loans</h4>
+{{#if currentLoans}}
+Library patrons have the following books checked out:
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Patron</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Checkout Date</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each currentLoans}}
+        <tr>
+            <td>{{userFirst}} {{userLast}}</td>
+            <td>{{title}}</td>
+            <td>{{author}}</td>
+            <td>{{borrowed}}</td>
+            <!--hidden form to send POST request to check in book -->
+            <td>
+                <form action="/admin/checkin" method="POST">
+                    <input type="hidden" name="userId" value="{{userId}}">
+                    <input type="hidden" name="bookId" value="{{bookId}}">
+                    <input type="submit" value="Checkin" class="btn btn-primary">
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+All library books have been returned to the system.
+{{/if}}
