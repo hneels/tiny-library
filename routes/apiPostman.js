@@ -77,13 +77,13 @@ router.get('/api/getbooks/author/:author', async (req, res) => {
             // build XML document
             let doc = xmlBookHelper(books);
 
-            res.type('application/xml').send('todo');
+            res.type('application/xml').send(doc);
         }
     })
 })
 
 
-// helper function to take a JSON object and conver it to XML books document
+// helper function to take a JSON object and convert it to XML books document
 function xmlBookHelper(books) {
 
     // build XML document

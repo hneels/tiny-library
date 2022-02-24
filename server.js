@@ -1,6 +1,6 @@
 /*
 Author: Hope Asher
-cs602 final project: Library App
+cs602 final project: Tiny Library
 
 Learned Passport from these tutorials:
 https://heynode.com/tutorial/authenticate-users-node-expressjs-and-passportjs/
@@ -93,7 +93,7 @@ app.use(customFlash);
 const customUser = require('./middleware/custom-user');
 app.use(customUser);
 
-// custom middleware to only allow authenticated admin on admin pages
+// custom middleware to only allow authenticated admin to access admin pages
 const customAdmin = require('./middleware/custom-admin');
 app.use('/admin', customAdmin)
 

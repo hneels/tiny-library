@@ -219,8 +219,7 @@ router.post('/admin/checkin', async (req, res) => {
 
 
 
-/* ---- Add New Book form: display form ---- */
-// add a new book or modify a current book
+/* ---- Add New Book form: display form to add a book---- */
 router.get('/admin/addbook', async (req, res) => {
 
     // get all the possible book subjects
@@ -270,7 +269,7 @@ router.post('/admin/addbook', async (req, res) => {
 })
 
 
-/* View page to update existing books (updates are received via apiAdmin) */
+/* View page to update existing books (updates are received via apiAdmin.js) */
 router.get('/admin/editbooks', async (req, res) => {
 
     // retrieve all books from db, sorted by author
@@ -282,9 +281,5 @@ router.get('/admin/editbooks', async (req, res) => {
 })
 
 
-
-
-/* ---- Page for librarian to view and manage users? ---- */
-// view a user's current checkouts?
 
 module.exports = router;

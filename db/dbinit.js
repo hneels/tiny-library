@@ -7,10 +7,14 @@ const models = require('./models');
 
 (async () => {
 
-    // clear the database if exists
+    // completely clear the database if exists
     await models.Book.deleteMany({});
+    await models.Favorite.deleteMany({});
+    await models.Hold.deleteMany({});
+    await models.Loan.deleteMany({});
+    await models.User.deleteMany({});
 
-    // seed with new data
+    // seed with new book data
     await new models.Book({
         title: 'A Little Life',
         author: 'Hanya Yanagihara',

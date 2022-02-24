@@ -5,66 +5,61 @@
 
 <h2>{{book.title}}</h2>
 
-<div class="container">
-    <dl>
-        <dt>
-            Title
-        </dt>
-        <dd>
-            {{book.title}}
-        </dd>
-        <dt>
-            Author
-        </dt>
-        <dd>
-            {{book.author}}
-        </dd>
-        <dt>
-            Subject
-        </dt>
-        <dd>
-            {{book.subject}}
-        </dd>
-        <dt>
-            Year Published
-        </dt>
-        <dd>
-            {{book.year}}
-        </dd>
-        <dt>
-            Summary
-        </dt>
-        <dd>
-            {{book.summary}}
-        </dd>
-    </dl>
 
-    <!--display "Add to Favorites" and "Place Hold" buttons only if user is logged in -->
-    {{#if user}}
+<dl>
+    <dt>
+        Title
+    </dt>
+    <dd>
+        {{book.title}}
+    </dd>
+    <dt>
+        Author
+    </dt>
+    <dd>
+        {{book.author}}
+    </dd>
+    <dt>
+        Subject
+    </dt>
+    <dd>
+        {{book.subject}}
+    </dd>
+    <dt>
+        Year Published
+    </dt>
+    <dd>
+        {{book.year}}
+    </dd>
+    <dt>
+        Summary
+    </dt>
+    <dd>
+        {{book.summary}}
+    </dd>
+</dl>
 
-    <!-- text of Favorite button is set based on whether user has already favorited this book -->
-    <!--hiding bookId in the data properties to send them in the json fetch -->
-    <button class="btn btn-warning" data-book="{{book._id}}" id="favButton">
-        {{#if favorite}}
-        Remove from Favorites
-        {{else}}
-        Add to Favorites
-        {{/if}}
-    </button>
+<!--display "Add to Favorites" and "Place Hold" buttons only if user is logged in -->
+{{#if user}}
 
-    <!-- text of Hold button is set based on whether user has a hold on this book -->
-    <!-- if the book is currently checked out by this user, the Hold button is disabled -->
-    <button class="btn btn-primary" id="loanButton" {{#if checkedOut}} disabled {{/if}}>
-        {{#if hold}}
-        Remove Hold
-        {{else}}
-        Place Hold
-        {{/if}}
-    </button>
-
-
-
+<!-- text of Favorite button is set based on whether user has already favorited this book -->
+<!--hiding bookId in the data properties to send them in the json fetch -->
+<button class="btn btn-warning" data-book="{{book._id}}" id="favButton">
+    {{#if favorite}}
+    Remove from Favorites
+    {{else}}
+    Add to Favorites
     {{/if}}
+</button>
 
+<!-- text of Hold button is set based on whether user has a hold on this book -->
+<!-- if the book is currently checked out by this user, the Hold button is disabled -->
+<button class="btn btn-primary" id="loanButton" {{#if checkedOut}} disabled {{/if}}>
+    {{#if hold}}
+    Remove Hold
+    {{else}}
+    Place Hold
+    {{/if}}
+</button>
 
-</div>
+{{/if}}

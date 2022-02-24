@@ -31,9 +31,7 @@ router.get('/book/:id', async (req, res, next) => {
         // retrieve the book by its id and return as an object
         let book = await Book.findById(bookId).lean();
 
-        let favorite = null;
-        let hold = null;
-        let checkedOut = null;
+        let favorite, hold, checkedOut = false;
 
         // if user is logged in, retrieve this book's status on Favorite and Hold lists
         if (req.isAuthenticated()) {
@@ -43,14 +41,15 @@ router.get('/book/:id', async (req, res, next) => {
             // does this user have this book as a Favorite
             let faveResult = await Favorite.find({ 'userId': userId, 'bookId': bookId });
             // favorite boolean is true if this book is on user's favorite list and false if not
-            faveResult.length > 0 ? favorite = true : favorite = false;
+            favorite = faveResult.length > 0 ? true : false;
 
             // does this user have this book in their Hold requests
             let holdResult = await Hold.find({ 'userId': userId, 'bookId': bookId })
-            holdResult.length > 0 ? hold = true : hold = false;
+            hold = holdResult.length > 0 ? true : false;
 
             // does this user have this book currently checked out
-            checkedOut = false;
+            let loanResult = await Loan.find({ 'userId': userId, 'bookId': bookId, 'returned': null });
+            checkedOut = loanResult.length > 0 ? true : false;
         }
 
         // render book view with book data and books list booleans
@@ -150,6 +149,7 @@ router.get('/favorites', ensureLoggedIn(), async (req, res) => {
             $match: { userId: userId }
         },
         {
+            // join to Book collection
             $lookup: {
                 from: 'books',
                 localField: 'bookId',

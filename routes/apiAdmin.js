@@ -10,10 +10,10 @@ const { Book, User, Favorite, Hold, Loan } = require('../db/models');
 const passport = require('passport');
 
 
-/* ---- REST endpoint for updating a book's inventory ---- */
-router.post('/admin/api/changecopies', async (req, res) => {
+/* ---- REST API endpoint for updating a book's inventory ---- */
+router.post('/admin/api/changecopies/:id', async (req, res) => {
     try {
-        const bookId = req.body.bookId;
+        const bookId = req.params.id;
         let newCopyNum = req.body.copyNum;
 
         // error check that new copies isn't less than currently checked out copies or less than 1
@@ -35,8 +35,33 @@ router.post('/admin/api/changecopies', async (req, res) => {
 
     } catch (error) {
 
-        res.status(404).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 })
+
+
+/* ---- REST API endpoint for deleting a book ---- */
+router.post('/admin/api/deletebook/:id', async (req, res) => {
+    let bookId = req.params.id;
+    try {
+        // check that no copies are currently checked out
+        let loanedCopies = await Loan.find({ returned: null, bookId: bookId }).count();
+        if (loanedCopies > 0) throw new Error('Cannot delete a book that is currently checked out.');
+
+        // delete the book
+        await Book.deleteOne({ _id: bookId });
+
+        // delete any holds or favorites associated with the book
+        await Hold.deleteMany({ bookId: bookId });
+        await Favorite.deleteMany({ bookId: bookId });
+
+        res.status(200).json({ success: 'book deleted' })
+
+    } catch (error) {
+        // send error message if book was not found or not deleted
+        res.status(400).json({ message: error.message });
+    }
+})
+
 
 module.exports = router;
