@@ -6,10 +6,11 @@ Sends fetch requests to routes.js
 // button elements
 const loanButton = document.getElementById('loanButton');
 const favButton = document.getElementById('favButton');
+let bookId = null;
 
 // the book object's _id to send with fetch
 if (favButton) {
-    const bookId = favButton.dataset.book;
+    bookId = favButton.dataset.book;
 }
 
 // event listener for hold button
@@ -20,11 +21,11 @@ if (loanButton) {
 
                 // if the message received is "hold placed", update the button accordingly
                 if (data.message == 'hold placed') {
-                    loanButton.innerHTML = 'Remove Hold'
+                    loanButton.innerHTML = 'Remove Hold';
 
                     // if the message received is "hold removed", update the button accordingly
                 } else if (data.message == 'hold removed') {
-                    loanButton.innerHTML = 'Place Hold'
+                    loanButton.innerHTML = 'Place Hold';
 
                     // some kind of error message received
                 } else {

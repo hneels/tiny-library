@@ -28,7 +28,7 @@ const sections = require('express-handlebars-sections');
 
 // Handlebars middleware with sections
 const { engine } = require('express-handlebars');
-// set Handlebars as view engine
+// set Handlebars as view engine with sections helper
 app.engine('handlebars', engine({
     defaultLayout: 'main',
     helpers: {

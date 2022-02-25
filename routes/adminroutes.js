@@ -86,7 +86,6 @@ router.get('/admin/loans', async (req, res) => {
         hold.created = format(hold.created, 'MMM d y, h:mmaaa');
     }
 
-
     // get all loans that are currently checked out - don't have a RETURNED field
     let currentLoans = await Loan.aggregate([
         {
@@ -144,7 +143,6 @@ router.get('/admin/loans', async (req, res) => {
         holds: holds,
         currentLoans: currentLoans
     })
-
 })
 
 
@@ -215,7 +213,6 @@ router.post('/admin/checkin', async (req, res) => {
         res.redirect('/admin/loans');
     }
 });
-
 
 
 

@@ -11,7 +11,7 @@ const { ensureLoggedIn } = require('connect-ensure-login');
 
 
 // API route for receiving a Favorite add/remove request
-router.post('/api/favorite', async (req, res) => {
+router.post('/api/favorite', ensureLoggedIn(), async (req, res) => {
     try {
         // get the book ID from the fetch and the user from the request
         const bookId = req.body.bookId;
@@ -38,7 +38,7 @@ router.post('/api/favorite', async (req, res) => {
 
 
 // API route for receiving a Hold add/ remove request
-router.post('/api/hold', async (req, res) => {
+router.post('/api/hold', ensureLoggedIn(), async (req, res) => {
     try {
         // get the book ID from the fetch and the user from the request
         const bookId = req.body.bookId;

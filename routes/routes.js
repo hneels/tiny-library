@@ -44,7 +44,7 @@ router.get('/book/:id', async (req, res, next) => {
             favorite = faveResult.length > 0 ? true : false;
 
             // does this user have this book in their Hold requests
-            let holdResult = await Hold.find({ 'userId': userId, 'bookId': bookId })
+            let holdResult = await Hold.find({ 'userId': userId, 'bookId': bookId });
             hold = holdResult.length > 0 ? true : false;
 
             // does this user have this book currently checked out
@@ -69,7 +69,7 @@ router.get('/book/:id', async (req, res, next) => {
 
 /* ---- Login page ---- */
 router.get('/login', (req, res) => {
-    res.render('loginView',);
+    res.render('loginView');
 });
 
 // use Passport for login
