@@ -53,7 +53,7 @@ router.get('/admin/loans', async (req, res) => {
                 from: 'loans',
                 localField: 'bookId',
                 foreignField: 'bookId',
-                as: 'Loan'
+                as: 'Loans',
             }
         },
         {
@@ -67,7 +67,17 @@ router.get('/admin/loans', async (req, res) => {
                 userFirst: 1,
                 userLast: 1,
                 created: 1,
-                loanCount: { $size: "$Loan" } // the number of currently checked out copies
+                loanCount: {
+                    $size: {
+                        $filter: {
+                            input: '$Loans',
+                            as: 'loan',
+                            cond: {
+                                $eq: [{ $type: '$$loan.returned' }, "missing"]
+                            }
+                        }
+                    }
+                }
             }
         }
     ]);
@@ -194,11 +204,7 @@ router.post('/admin/checkin', async (req, res) => {
         const bookId = req.body.bookId;
 
         // get the loan item between this book and this user
-        let loan = await Loan.findOne({ userId: userId, bookId: bookId });
-
-        // insert the returned timestamp, which marks the book returned in the system
-        loan.returned = Date.now();
-        await loan.save();
+        await Loan.update({ userId: userId, bookId: bookId }, { returned: Date.now() });
 
         // add flash message to show success
         req.flash('success', 'Book was checked in to the system.');
