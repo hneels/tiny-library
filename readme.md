@@ -9,7 +9,7 @@
 * REST APIs for JSON and XML
 
 ## Summary
-Tiny Library is a library loan management system with different access levels for patrons, librarians, and unauthenticated users.
+Tiny Library is a library loan management system with different access levels for patrons, librarians, and unauthenticated users. (This was a solo project for CS602.)
 
 ## Video Demo
 
