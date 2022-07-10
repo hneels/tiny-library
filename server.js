@@ -1,5 +1,5 @@
 /*
-Author: Hope Asher
+Author: Hope Neels
 cs602 final project: Tiny Library
 
 Learned Passport from these tutorials:

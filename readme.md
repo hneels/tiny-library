@@ -17,6 +17,16 @@ Tiny Library is a library loan management system with different access levels fo
 <img src="vid.png" alt="video demo" width="600px">
 </a>
 
+## How To Run
+1. Clone this repository
+2. Install MongoDB for your machine <a href="https://www.mongodb.com/docs/manual/installation/">(instructions)</a>
+3. Run MongoDB process in terminal (for Mac you can use <a href="https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/">Homebrew</a>: 'brew services start mongodb-community@5.0' command)
+4. Open the project and in root directory, type 'npm install' command to install the dependencies from package.json.
+5. type 'npm start' command to run the project
+6. log in to the site as a librarian: 
+* email: 'joe@bookman.com'
+* password: 'test'
+
 ## Database Models
 The app implements the following models/ MongoDB collections:
 * **User:** can be type Admin or Patron. Authentication and password hashing is handled by Passport middleware.
